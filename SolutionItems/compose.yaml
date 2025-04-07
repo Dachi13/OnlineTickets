@@ -1,4 +1,5 @@
 services:
+  
   event.api:
     image: event.api
     build:
@@ -29,6 +30,21 @@ services:
     depends_on:
       - basketdb
   
+  discount.grpc:
+    image: discount.grpc
+    build:
+      context: ../
+      dockerfile: Services/Discount.Grpc/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__Database=Host=discountdb;Port=5432;Database=DiscountDb;Username=postgres;Password=Dachi123;Include Error Detail=true
+    ports:
+      - "6002:8080"
+    depends_on:
+      - basketdb
+  
   eventdb:
     container_name: eventdb
     image: postgres
@@ -52,7 +68,20 @@ services:
       - "5433:5432"
     volumes:
       - basketdb_data:/var/lib/postgresql/data
+  
+  discountdb:
+    container_name: discountdb
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: DiscountDb
+      POSTGRES_PASSWORD: Dachi123
+    ports:
+      - "5434:5432"
+    volumes:
+      - discountdb_data:/var/lib/postgresql/data
 
 volumes:
   eventdb_data:
   basketdb_data:
+  discountdb_data:

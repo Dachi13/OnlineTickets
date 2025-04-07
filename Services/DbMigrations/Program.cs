@@ -10,6 +10,7 @@ var migrations = new Dictionary<string, string>
 {
     { "Sql/EventDb", configuration.GetConnectionString("EventDb")! },
     { "Sql/BasketDb", configuration.GetConnectionString("BasketDB")! },
+    { "Sql/DiscountDb", configuration.GetConnectionString("DiscountDB")! }
 };
 
 foreach (var migration in migrations)
