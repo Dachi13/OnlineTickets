@@ -9,7 +9,7 @@ var configuration = new ConfigurationBuilder()
 var migrations = new Dictionary<string, string>
 {
     { "Sql/EventDb", configuration.GetConnectionString("EventDb")! },
-    // { "MigrationDatabase2.sql", configuration.GetConnectionString("BasketDB") },
+    { "Sql/BasketDb", configuration.GetConnectionString("BasketDB")! },
 };
 
 foreach (var migration in migrations)
