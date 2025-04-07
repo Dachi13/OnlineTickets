@@ -25,4 +25,9 @@
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Sql\EventDb\EventDbScript001 -- CreateInitialTables.sql" />
+      <EmbeddedResource Include="Sql\EventDb\EventDbScript001 -- CreateInitialTables.sql" />
+    </ItemGroup>
 </Project>

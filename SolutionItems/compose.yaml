@@ -1,0 +1,16 @@
+services:
+  
+  eventdb:
+    container_name: eventdb
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: EventDb
+      POSTGRES_PASSWORD: Dachi123
+    ports:
+      - "5432:5432"
+    volumes:
+      - eventdb_data:/var/lib/postgresql/data
+
+volumes:
+  eventdb_data:

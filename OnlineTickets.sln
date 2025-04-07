@@ -8,7 +8,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbMigrations", "Services\Db
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Services\Shared\Shared.csproj", "{A920D9FF-8781-4F86-9C64-4BD48DB0420B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E40ABFAF-D91F-437B-B670-2DADC0700DB7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{EFFBA634-BD19-45BC-8FC3-FDB045267E93}"
+	ProjectSection(SolutionItems) = preProject
+		SolutionItems\compose.yaml = SolutionItems\compose.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

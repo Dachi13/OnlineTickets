@@ -63,3 +63,7 @@ VALUES (
        ) RETURNING "Id" INTO eventid;
 END;
 $$;
+
+INSERT INTO public."Categories"(
+    "Name")
+VALUES ('New Year');

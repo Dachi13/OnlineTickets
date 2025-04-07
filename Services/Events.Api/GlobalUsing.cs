@@ -12,3 +12,4 @@ global using Shared.Behaviors;
 global using Shared.Exceptions.Handler;
 global using HealthChecks.UI.Client;
 global using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+global using Events.Api.Events.Create;
