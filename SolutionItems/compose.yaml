@@ -1,5 +1,3 @@
-version: '3.4'
-
 services:
   event.api:
     image: event.api
@@ -15,6 +13,21 @@ services:
       - "6000:8080"
     depends_on:
       - eventdb
+  
+  basket.api:
+    image: basket.api
+    build:
+      context: ../
+      dockerfile: Services/Basket.Api/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__Database=Host=basketdb;Port=5432;Database=BasketDb;Username=postgres;Password=Dachi123;Include Error Detail=true
+    ports:
+      - "6001:8080"
+    depends_on:
+      - basketdb
   
   eventdb:
     container_name: eventdb
