@@ -1,0 +1,14 @@
+global using Mapster;
+global using MediatR;
+global using Shared.CQRS;
+global using Shared;
+global using System.Data;
+global using Shared.Library;
+global using Dapper;
+global using FluentValidation;
+global using Shared.Models;
+global using Npgsql;
+global using Shared.Behaviors;
+global using Shared.Exceptions.Handler;
+global using HealthChecks.UI.Client;
+global using Microsoft.AspNetCore.Diagnostics.HealthChecks;
