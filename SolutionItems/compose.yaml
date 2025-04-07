@@ -1,4 +1,20 @@
+version: '3.4'
+
 services:
+  event.api:
+    image: event.api
+    build:
+      context: ../
+      dockerfile: Services/Events.Api/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__Database=Host=eventdb;Port=5432;Database=EventDb;Username=postgres;Password=Dachi123;Include Error Detail=true
+    ports:
+      - "6000:8080"
+    depends_on:
+      - eventdb
   
   eventdb:
     container_name: eventdb
