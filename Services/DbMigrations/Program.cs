@@ -17,7 +17,7 @@ foreach (var (filePath, connectionString) in migrations)
 {
     if (connectionString is null)
     {
-        Console.WriteLine($"No connection string for filepath: {filePath}");
+        PrintError($"No connection string for filepath: {filePath}");
         continue;
     }
 
@@ -43,9 +43,7 @@ foreach (var (filePath, connectionString) in migrations)
 
     if (!result.Successful)
     {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine(result.Error);
-        Console.ResetColor();
+        PrintException(result.Error);
 #if DEBUG
         Console.ReadLine();
 #endif
@@ -58,3 +56,17 @@ foreach (var (filePath, connectionString) in migrations)
 }
 
 return 0;
+
+void PrintError(string error)
+{
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine(error);
+    Console.ResetColor();
+}
+
+void PrintException(Exception error)
+{
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine(error);
+    Console.ResetColor();
+}
