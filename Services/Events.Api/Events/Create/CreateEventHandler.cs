@@ -6,6 +6,7 @@ public record CreateEventCommand(
     string Location,
     int CategoryId,
     int AmountOfTickets,
+    double Price,
     DateTime StartTime,
     DateTime EndTime,
     string? ImageFile)

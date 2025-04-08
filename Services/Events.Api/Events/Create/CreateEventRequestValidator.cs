@@ -28,6 +28,11 @@ public class CreateEventRequestValidator : AbstractValidator<CreateEventCommand>
         RuleFor(eventCommand => eventCommand.AmountOfTickets)
             .Cascade(CascadeMode.Stop)
             .NotEmpty().WithMessage("{PropertyName} is Empty")
+            .GreaterThan(0).WithMessage("{PropertyName} can not be less than 1");        
+        
+        RuleFor(eventCommand => eventCommand.Price)
+            .Cascade(CascadeMode.Stop)
+            .NotEmpty().WithMessage("{PropertyName} is Empty")
             .GreaterThan(0).WithMessage("{PropertyName} can not be less than 1");
 
         RuleFor(eventCommand => eventCommand.StartTime)

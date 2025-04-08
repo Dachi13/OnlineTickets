@@ -18,6 +18,7 @@ public class EventRepository(DapperContext context) : IEventRepository
             parameters.Add("p_location", eventCommand.Location);
             parameters.Add("p_categoryid", eventCommand.CategoryId);
             parameters.Add("p_amountoftickets", eventCommand.AmountOfTickets);
+            parameters.Add("p_price", eventCommand.Price);
             parameters.Add("p_starttime", eventCommand.StartTime);
             parameters.Add("p_endtime", eventCommand.EndTime);
             parameters.Add("p_imagefile", imageBytes);
