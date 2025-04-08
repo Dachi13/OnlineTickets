@@ -6,17 +6,20 @@ var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .Build();
 
-var migrations = new Dictionary<string, string>
+var migrations = new Dictionary<string, string?>
 {
-    { "Sql/EventDb", configuration.GetConnectionString("EventDb")! },
-    { "Sql/BasketDb", configuration.GetConnectionString("BasketDB")! },
-    { "Sql/DiscountDb", configuration.GetConnectionString("DiscountDB")! }
+    { "Sql/EventDb", configuration.GetConnectionString("EventDb") },
+    { "Sql/BasketDb", configuration.GetConnectionString("BasketDB") },
+    { "Sql/DiscountDb", configuration.GetConnectionString("DiscountDB") }
 };
 
-foreach (var migration in migrations)
+foreach (var (filePath, connectionString) in migrations)
 {
-    var filePath = migration.Key;
-    var connectionString = migration.Value;
+    if (connectionString is null)
+    {
+        Console.WriteLine($"No connection string for filepath: {filePath}");
+        continue;
+    }
 
     var rootPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
     var fullPath = Path.Combine(rootPath, filePath);
