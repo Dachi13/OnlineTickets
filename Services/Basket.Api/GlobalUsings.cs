@@ -15,3 +15,4 @@ global using Shared.Exceptions.Handler;
 global using Basket.Api.Models;
 global using System.Text.Json;
 global using Microsoft.Extensions.Caching.Distributed;
+global using Discount.Grpc;

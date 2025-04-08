@@ -1,5 +1,3 @@
-using Discount.Grpc;
-
 namespace Basket.Api.Basket.Create;
 
 public record StoreToBasketCommand(EventsBasket Basket) : ICommand<StoreToBasketResult>;
