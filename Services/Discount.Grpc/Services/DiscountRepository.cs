@@ -7,9 +7,16 @@ namespace Discount.Grpc.Services;
 
 public class DiscountRepository(DapperContext context) : IDiscountRepository
 {
-    public Task<Coupon?> GetDiscountAsync(GetDiscountRequest request, CancellationToken cancellationToken = default)
+    public async Task<Coupon?> GetDiscountAsync(long categoryId, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        var connection = await context.CreateConnectionAsync();
+
+        string query =
+            $"SELECT * FROM public.\"Discounts\" WHERE \"CategoryId\" = {categoryId} AND \"IsDeleted\" = FALSE LIMIT 1";
+
+        var coupon = await connection.QueryFirstOrDefaultAsync<Coupon>(query);
+
+        return coupon;
     }
 
     public async Task<long> CreateDiscountAsync(Coupon coupon, CancellationToken cancellationToken = default)
@@ -17,16 +24,14 @@ public class DiscountRepository(DapperContext context) : IDiscountRepository
         var connection = await context.CreateConnectionAsync();
 
         var parameters = new DynamicParameters();
-        parameters.Add("p_categoryid", coupon.CategoryId, DbType.Int64);  // Use matching type: DbType.Int64 for bigint
-        parameters.Add("p_description", coupon.Description, DbType.String);  // Use DbType.String for text
-        parameters.Add("p_amount", coupon.Amount, DbType.Int32);  // Use DbType.Decimal for numeric
-        parameters.Add("discountid", dbType: DbType.Int64, direction: ParameterDirection.Output);  // Make sure it's an output parameter
+        parameters.Add("p_categoryid", coupon.CategoryId, DbType.Int64);
+        parameters.Add("p_description", coupon.Description, DbType.String);
+        parameters.Add("p_amount", coupon.Amount, DbType.Int32);
+        parameters.Add("discountid", dbType: DbType.Int64, direction: ParameterDirection.Output);
 
         await connection.ExecuteAsync("public.spadddiscount", parameters, commandType: CommandType.StoredProcedure);
 
-// Retrieve the output parameter
         var discountId = parameters.Get<long>("discountid");
-
 
         return discountId;
     }

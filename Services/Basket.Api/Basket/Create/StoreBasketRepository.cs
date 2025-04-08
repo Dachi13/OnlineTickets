@@ -18,7 +18,7 @@ public class StoreBasketRepository(DapperContext context) : IStoreBasketReposito
                 parameters.Add("p_ticketid", @event.TicketId);
                 parameters.Add("p_amount", @event.Amount);
                 parameters.Add("p_price", @event.Price);
-                parameters.Add("p_discountid", basket.DiscountId);
+                parameters.Add("p_discountid", @event.DiscountId);
                 parameters.Add("basketid", dbType: DbType.Int64, direction: ParameterDirection.Output);
 
                 await connection.ExecuteAsync(

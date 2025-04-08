@@ -25,6 +25,7 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_URLS=http://+:8080
       - ConnectionStrings__Database=Host=basketdb;Port=5432;Database=BasketDb;Username=postgres;Password=Dachi123;Include Error Detail=true
+      - GrpcSettings__DiscountUrl=http://discount.grpc:8080
     ports:
       - "6001:8080"
     depends_on:
@@ -43,7 +44,7 @@ services:
     ports:
       - "6002:8080"
     depends_on:
-      - basketdb
+      - discountdb
   
   eventdb:
     container_name: eventdb

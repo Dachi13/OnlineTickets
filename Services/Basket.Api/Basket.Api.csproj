@@ -8,7 +8,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Shared\Shared.csproj" />
+        <PackageReference Include="Grpc.AspNetCore" Version="2.49.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Shared\Shared.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Protobuf Include="..\Discount.Grpc\Protos\discount.proto" GrpcServices="Client">
+            <Link>Protos\discount.proto</Link>
+        </Protobuf>
     </ItemGroup>
 
     <ItemGroup>
