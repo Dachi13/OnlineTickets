@@ -4,6 +4,7 @@ using Discount.Grpc;
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("Database")!;
+var redisConnectionString = builder.Configuration.GetConnectionString("Redis")!;
 
 // Configure Database
 builder.Services.AddScoped<DapperContext>(sp => new DapperContext(sp.GetRequiredService<IConfiguration>()));
@@ -23,12 +24,15 @@ builder.Services.AddMediatR(config =>
 builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(options =>
 {
     options.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]!);
-    
 });
+
+builder.Services.AddStackExchangeRedisCache(options => { options.Configuration = redisConnectionString; });
 
 builder.Services.AddValidatorsFromAssembly(assembly);
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
-builder.Services.AddHealthChecks().AddNpgSql(connectionString);
+builder.Services.AddHealthChecks()
+    .AddNpgSql(connectionString)
+    .AddRedis(redisConnectionString);
 
 var app = builder.Build();
 

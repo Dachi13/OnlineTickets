@@ -1,6 +1,8 @@
 namespace Basket.Api.Basket.Create;
 
-public class StoreBasketRepository(DapperContext context) : IStoreBasketRepository
+public class StoreBasketRepository(
+    DapperContext context,
+    IDistributedCache cache) : IStoreBasketRepository
 {
     public async Task<Result<long?>> StoreToBasket(EventsBasket basket)
     {
@@ -43,5 +45,17 @@ public class StoreBasketRepository(DapperContext context) : IStoreBasketReposito
             await transaction.RollbackAsync();
             return new Error("Internal_Error", exception.Message, ErrorType.InternalServerError);
         }
+    }
+
+    public async Task<Result<long?>> CachedStoreToBasket(EventsBasket basket)
+    {
+        var basketId = await StoreToBasket(basket);
+
+        if (!basketId.IsSuccess) return basketId;
+
+        await cache.SetStringAsync(basketId.Value!.Value.ToString(), JsonSerializer.Serialize(basket),
+            CancellationToken.None);
+
+        return basketId;
     }
 }

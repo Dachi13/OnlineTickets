@@ -16,7 +16,7 @@ public class StoreBasketHandler(
     {
         await DeductDiscount(command.Basket);
 
-        var basketId = await repository.StoreToBasket(command.Basket);
+        var basketId = await repository.CachedStoreToBasket(command.Basket);
 
         return new StoreToBasketResult(basketId.Value);
     }
