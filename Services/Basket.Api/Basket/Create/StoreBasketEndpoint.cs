@@ -1,5 +1,3 @@
-using Basket.Api.Models;
-
 namespace Basket.Api.Basket.Create;
 
 public record StoreToBasketRequest(EventsBasket Basket);

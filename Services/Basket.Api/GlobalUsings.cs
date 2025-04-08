@@ -12,3 +12,4 @@ global using Shared.Behaviors;
 global using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 global using HealthChecks.UI.Client;
 global using Shared.Exceptions.Handler;
+global using Basket.Api.Models;
