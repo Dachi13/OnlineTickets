@@ -7,9 +7,16 @@
 ## 📦 Features
 
 - Event creation and management
-- CRUD operations for event data
+- Full CRUD operations for events
 - Docker-based service orchestration
 - Database migrations with .NET
+
+---
+
+## ✅ Requirements
+
+- [.NET SDK 9.0](https://dotnet.microsoft.com/download)
+- [Docker](https://www.docker.com/)
 
 ---
 
