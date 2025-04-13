@@ -1,21 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{18586421-66F0-47C8-B28B-5BF7BD757194}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "src\Services", "{18586421-66F0-47C8-B28B-5BF7BD757194}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.Api", "Services\Events.Api\Events.Api.csproj", "{B9CB9BF1-BA55-424E-85CE-F87E22FA2483}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.Api", "src\Services\Events.Api\Events.Api.csproj", "{B9CB9BF1-BA55-424E-85CE-F87E22FA2483}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbMigrations", "Services\DbMigrations\DbMigrations.csproj", "{61B8997F-5E7F-4B4F-A945-F02CA110B75F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbMigrations", "src\Services\DbMigrations\DbMigrations.csproj", "{61B8997F-5E7F-4B4F-A945-F02CA110B75F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Services\Shared\Shared.csproj", "{A920D9FF-8781-4F86-9C64-4BD48DB0420B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "src\Services\Shared\Shared.csproj", "{A920D9FF-8781-4F86-9C64-4BD48DB0420B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{EFFBA634-BD19-45BC-8FC3-FDB045267E93}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "src\SolutionItems", "{EFFBA634-BD19-45BC-8FC3-FDB045267E93}"
 	ProjectSection(SolutionItems) = preProject
-		SolutionItems\compose.yaml = SolutionItems\compose.yaml
+		src\SolutionItems\compose.yaml = src\SolutionItems\compose.yaml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basket.Api", "Services\Basket.Api\Basket.Api.csproj", "{D449292F-7B6F-4713-9332-9CDC86AAFBC0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basket.Api", "src\Services\Basket.Api\Basket.Api.csproj", "{D449292F-7B6F-4713-9332-9CDC86AAFBC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Discount.Grpc", "Services\Discount.Grpc\Discount.Grpc.csproj", "{676E7F96-3505-4416-A333-281798CED6FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Discount.Grpc", "src\Services\Discount.Grpc\Discount.Grpc.csproj", "{676E7F96-3505-4416-A333-281798CED6FF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{94C0C667-7640-4018-96AD-2EC169D9B87C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +30,8 @@ Global
 		{A920D9FF-8781-4F86-9C64-4BD48DB0420B} = {18586421-66F0-47C8-B28B-5BF7BD757194}
 		{D449292F-7B6F-4713-9332-9CDC86AAFBC0} = {18586421-66F0-47C8-B28B-5BF7BD757194}
 		{676E7F96-3505-4416-A333-281798CED6FF} = {18586421-66F0-47C8-B28B-5BF7BD757194}
+		{18586421-66F0-47C8-B28B-5BF7BD757194} = {94C0C667-7640-4018-96AD-2EC169D9B87C}
+		{EFFBA634-BD19-45BC-8FC3-FDB045267E93} = {94C0C667-7640-4018-96AD-2EC169D9B87C}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{B9CB9BF1-BA55-424E-85CE-F87E22FA2483}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

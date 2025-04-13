@@ -1,5 +1,4 @@
 using Basket.Api.Basket.Create;
-using Discount.Grpc;
 
 var builder = WebApplication.CreateBuilder(args);
 
