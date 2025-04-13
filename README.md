@@ -33,11 +33,13 @@ cd OnlineTickets
 
 ### 2. Open Solution Items and run
 ```bash
+cd /OnlineTickets/src/SolutionItems
 docker-compose build
 docker-compose up
 ```
 
 ### 3. Open DbMigrations and run
 ```bash
+cd /OnlineTickets/src/Services/DbMigrations
 dotnet run
 ```
