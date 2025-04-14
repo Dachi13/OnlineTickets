@@ -1,4 +1,6 @@
 using Basket.Api.Basket.Create;
+using Basket.Api.RabbitMQ;
+using RabbitMQ.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +26,11 @@ builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
 {
     options.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]!);
 });
+
+// Configuring rabbit mq
+builder.Services.AddScoped<IRabbitMqPublisher, RabbitMqPublisher>();
+builder.Services.Configure<RabbitMqSettings>(builder.Configuration.GetSection("RabbitMQ"));
+builder.Services.AddSingleton<RabbitMqPublisher>();
 
 builder.Services.AddStackExchangeRedisCache(options => { options.Configuration = redisConnectionString; });
 

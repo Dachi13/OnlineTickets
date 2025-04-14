@@ -1,3 +1,5 @@
+using Basket.Api.RabbitMQ;
+
 namespace Basket.Api.Basket.Create;
 
 public record StoreToBasketCommand(EventsBasket Basket) : ICommand<StoreToBasketResult>;
@@ -6,6 +8,7 @@ public record StoreToBasketResult(long? BasketId);
 
 public class StoreBasketHandler(
     IStoreBasketRepository repository,
+    IRabbitMqPublisher publisher,
     DiscountProtoService.DiscountProtoServiceClient discountServiceClient)
     : ICommandHandler<StoreToBasketCommand, StoreToBasketResult>
 {
@@ -15,6 +18,11 @@ public class StoreBasketHandler(
         await DeductDiscount(command.Basket);
 
         var basketId = await repository.CachedStoreToBasket(command.Basket);
+
+        if (!basketId.IsSuccess) return new StoreToBasketResult(basketId.Value);
+
+        var message = JsonSerializer.Serialize(command.Basket);
+        await publisher.Publish(message);
 
         return new StoreToBasketResult(basketId.Value);
     }
