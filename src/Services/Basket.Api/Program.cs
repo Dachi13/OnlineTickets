@@ -1,7 +1,3 @@
-using Basket.Api.Basket.Create;
-using Basket.Api.RabbitMQ;
-using RabbitMQ.Client;
-
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("Database")!;

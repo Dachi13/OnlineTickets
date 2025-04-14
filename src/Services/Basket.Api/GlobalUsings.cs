@@ -16,3 +16,5 @@ global using Basket.Api.Models;
 global using System.Text.Json;
 global using Microsoft.Extensions.Caching.Distributed;
 global using Discount.Grpc;
+global using Basket.Api.Basket.Create;
+global using Basket.Api.RabbitMQ;
