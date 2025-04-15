@@ -4,5 +4,5 @@ namespace MessageSendingWorker.Repositories;
 
 public interface IPersonRepository
 {
-    Task<Person> GetPersonAsync(long id);
+    Task<Person?> GetPersonAsync(long id);
 }

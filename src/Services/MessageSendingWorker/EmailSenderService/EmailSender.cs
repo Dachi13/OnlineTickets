@@ -37,10 +37,8 @@ public class EmailSender(IOptions<Config> emailConfig, ILogger<EmailSender> logg
 
     private static string GetPathToEmailHtml()
     {
-        var baseDirectoryPath = Directory.GetParent(Directory.GetCurrentDirectory())!.FullName;
-        var parentDirectoryPath = Directory.GetParent(Directory.GetCurrentDirectory())!.Name;
-        var workerPath = string.Concat(parentDirectoryPath, ".Worker");
-        var path = Path.Combine(baseDirectoryPath, workerPath, "EmailContext", "EmailTemplate.html");
+        var currentDirectory = Directory.GetCurrentDirectory();
+        var path = Path.Combine(currentDirectory, "EmailContext", "EmailTemplate.html");
 
         return path;
     }

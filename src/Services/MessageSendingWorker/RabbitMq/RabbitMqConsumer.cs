@@ -73,13 +73,19 @@ public class RabbitMqConsumer : IRabbitMqConsumer, IAsyncDisposable
             _logger.LogInformation($"[Consumed] basket: {basketJson} Time: {DateTimeOffset.Now}");
 
             var person = await _repository.GetPersonAsync(eventsBasket.BuyerId);
+
+            if (person == null)
+            {
+                _logger.LogError($"[Error] person was not found {eventsBasket.BuyerId} \n Time: {DateTimeOffset.Now}");
+                return;
+            }
+
             var subject = "🎟️ Your Ticket Purchase Was Successful!";
             var message = $"You have successfully purchased the ticket\n" +
                           $"Amount: {eventsBasket.Events.Count}\n" +
                           $"Total Price: {eventsBasket.TotalPrice}";
 
-            await _service.SendEmailAsync(subject, person.Email, message, person.Name);
-            Console.WriteLine(message);
+            await _service.SendEmailAsync(subject, person.Email, person.Name, message);
         };
 
         await _channel.BasicConsumeAsync(

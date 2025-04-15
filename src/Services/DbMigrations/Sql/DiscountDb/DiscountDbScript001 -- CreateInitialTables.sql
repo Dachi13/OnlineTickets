@@ -5,7 +5,7 @@ CREATE TABLE public."Discounts"
     "Description" text      NOT NULL,
     "Amount"      numeric,
     "IsDeleted"   boolean   NOT NULL DEFAULT false,
-    PRIMARY KEY ("DiscountId")
+    PRIMARY KEY ("Id")
 );
 
 CREATE PROCEDURE public.spAddDiscount(
