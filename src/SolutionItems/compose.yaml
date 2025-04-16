@@ -52,7 +52,28 @@ services:
       - "6002:8080"
     depends_on:
       - discountdb
-  
+ 
+  messageSendingWorker:
+    image: messagesendingworker
+    build:
+      context: ../
+      dockerfile: Services/MessageSendingWorker/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - RabbitMQ__Host=rabbitmq
+      - RabbitMQ__Username=guest
+      - RabbitMQ__Password=guest
+      - RabbitMQ__QueueName=checkouts
+      - ConnectionStrings__Database=Host=eventdb;Port=5432;Database=EventDb;Username=postgres;Password=Dachi123;Include Error Detail=true
+      - Config__EmailConfig__Name=OnlineTickets
+      - Config__EmailConfig__FromEmail=YourEmail
+      - Config__EmailConfig__ApiKey=YourKey
+      - Config__WorkerConfig__DelayInSeconds=5000
+    depends_on:
+      - rabbitmq
+      - eventdb
+    restart: always
+
   eventdb:
     container_name: eventdb
     image: postgres
