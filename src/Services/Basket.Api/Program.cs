@@ -4,8 +4,7 @@ var connectionString = builder.Configuration.GetConnectionString("Database")!;
 var redisConnectionString = builder.Configuration.GetConnectionString("Redis")!;
 
 // Configure Database
-builder.Services.AddScoped<DapperContext>(sp => new DapperContext(sp.GetRequiredService<IConfiguration>()));
-builder.Services.AddSingleton<IDbConnection>(_ => new NpgsqlConnection(connectionString));
+builder.Services.AddScoped<DapperContext>(_ => new DapperContext(connectionString));
 builder.Services.AddScoped<IStoreBasketRepository, StoreBasketRepository>();
 
 // Add services to the container.

@@ -125,6 +125,18 @@ services:
     volumes:
       - discountdb_data:/var/lib/postgresql/data
 
+  usersdb:
+    container_name: usersdb
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: UsersDb
+      POSTGRES_PASSWORD: Dachi123
+    ports:
+      - "5435:5432"
+    volumes:
+      - usersdb_data:/var/lib/postgresql/data
+
   distributedcache:
     image: redis
     container_name: distributedcache
@@ -147,3 +159,4 @@ volumes:
   eventdb_data:
   basketdb_data:
   discountdb_data:
+  usersdb_data:

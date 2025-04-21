@@ -6,7 +6,8 @@ using MessageSendingWorker.Repositories;
 using Shared;
 
 var builder = Host.CreateApplicationBuilder(args);
-builder.Services.AddSingleton<DapperContext>(sp => new DapperContext(sp.GetRequiredService<IConfiguration>()));
+var connectionString = builder.Configuration.GetConnectionString("Database")!;
+builder.Services.AddSingleton<DapperContext>(_ => new DapperContext(connectionString));
 builder.Services.Configure<RabbitMqSettings>(builder.Configuration.GetSection("RabbitMQ"));
 builder.Services.Configure<Config>(builder.Configuration.GetSection("Config"));
 builder.Services.AddSingleton<IEmailSender, EmailSender>();

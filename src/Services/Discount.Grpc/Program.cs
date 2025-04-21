@@ -2,10 +2,10 @@ using Discount.Grpc.Services;
 using Shared;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var connectionString = builder.Configuration.GetConnectionString("Database")!;
 // Add services to the container.
 builder.Services.AddGrpc();
-builder.Services.AddScoped<DapperContext>(sp => new DapperContext(sp.GetRequiredService<IConfiguration>()));
+builder.Services.AddScoped<DapperContext>(_ => new DapperContext(connectionString));
 builder.Services.AddScoped<IDiscountRepository, DiscountRepository>();
 
 var app = builder.Build();

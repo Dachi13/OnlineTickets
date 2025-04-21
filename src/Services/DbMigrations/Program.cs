@@ -6,12 +6,16 @@ var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .Build();
 
-var migrations = new Dictionary<string, string?>
-{
-    { "Sql/EventDb", configuration.GetConnectionString("EventDb") },
-    { "Sql/BasketDb", configuration.GetConnectionString("BasketDB") },
-    { "Sql/DiscountDb", configuration.GetConnectionString("DiscountDB") }
-};
+var currentDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
+var dbMigrationsDirectory = currentDirectory.Parent!.Parent!.Parent!;
+
+var path = Path.Combine(dbMigrationsDirectory.FullName, "Sql");
+var sqlDirectory = Directory.GetDirectories(path);
+
+var migrations = sqlDirectory
+    .ToDictionary(directory
+        => directory, directory
+        => configuration.GetConnectionString(Path.GetFileName(directory)));
 
 foreach (var (filePath, connectionString) in migrations)
 {
@@ -21,12 +25,9 @@ foreach (var (filePath, connectionString) in migrations)
         continue;
     }
 
-    var rootPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
-    var fullPath = Path.Combine(rootPath, filePath);
-
-    if (!Directory.Exists(fullPath))
+    if (!Directory.Exists(filePath))
     {
-        Console.WriteLine($"Migration file not found: {fullPath}");
+        Console.WriteLine($"Migration file not found: {filePath}");
         return -1;
     }
 
@@ -35,7 +36,7 @@ foreach (var (filePath, connectionString) in migrations)
     var upgrader =
         DeployChanges.To
             .PostgresqlDatabase(connectionString)
-            .WithScriptsFromFileSystem(fullPath)
+            .WithScriptsFromFileSystem(filePath)
             .LogToConsole()
             .Build();
 

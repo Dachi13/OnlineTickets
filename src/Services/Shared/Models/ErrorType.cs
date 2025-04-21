@@ -8,5 +8,6 @@ public enum ErrorType
     Validation,
     DatabaseError,
     InternalServerError,
-    UnprocessableEntity
+    UnprocessableEntity,
+    InvalidRequest
 }

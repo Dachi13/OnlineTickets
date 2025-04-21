@@ -31,7 +31,9 @@ public class StoreBasketHandler(
         {
             var coupon = await discountServiceClient.GetDiscountAsync(new GetDiscountRequest
                 { CategoryId = @event.CategoryId });
+
             @event.Price -= coupon.Amount;
+
             if (coupon.Id != 0) @event.SetDiscountId(coupon.Id);
         }
     }

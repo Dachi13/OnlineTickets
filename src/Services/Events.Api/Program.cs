@@ -4,7 +4,7 @@ var connectionString = builder.Configuration.GetConnectionString("Database")!;
 
 builder.Services.AddSingleton<IDbConnection>(_ => new NpgsqlConnection(connectionString));
 builder.Services.AddScoped<IEventRepository, EventRepository>();
-builder.Services.AddScoped<DapperContext>(sp => new DapperContext(sp.GetRequiredService<IConfiguration>()));
+builder.Services.AddScoped<DapperContext>(_ => new DapperContext(connectionString));
 
 // Add services to the container.
 var assembly = typeof(Program).Assembly;

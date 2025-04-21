@@ -3,14 +3,13 @@ using Microsoft.Extensions.Configuration;
 
 namespace Shared;
 
-public class DapperContext(IConfiguration configuration) : IDisposable
+public class DapperContext(string connectionString) : IDisposable
 {
-    private readonly string _connectionString = configuration.GetConnectionString("Database")!;
     private NpgsqlConnection? _connection;
 
     public async Task<NpgsqlConnection> CreateConnectionAsync()
     {
-        _connection = new NpgsqlConnection(_connectionString);
+        _connection = new NpgsqlConnection(connectionString);
         await _connection.OpenAsync();
 
         return _connection;

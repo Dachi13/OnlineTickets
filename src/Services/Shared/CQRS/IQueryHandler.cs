@@ -1,8 +1,10 @@
 using MediatR;
+using Shared.Library;
 
 namespace Shared.CQRS;
 
-public interface IQueryHandler<in TQuery, TResponse> : IRequestHandler<TQuery, TResponse>
+public interface IQueryHandler<TQuery, TResponse>
+    : IRequestHandler<TQuery, Result<TResponse>>
     where TQuery : IQuery<TResponse>
     where TResponse : notnull
 {
