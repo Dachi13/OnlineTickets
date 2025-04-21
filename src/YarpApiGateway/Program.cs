@@ -1,32 +1,40 @@
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication.BearerToken;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
 
 builder.Services.AddReverseProxy()
-    .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
+    .LoadFromConfig(configuration.GetSection("ReverseProxy"));
 
-builder.Services
-    .AddAuthentication(BearerTokenDefaults.AuthenticationScheme)
-    .AddBearerToken();
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = configuration["Jwt:Issuer"],
+
+            ValidateAudience = true,
+            ValidAudience = configuration["Jwt:Audience"],
+
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(configuration["Jwt:Key"]!)
+            ),
+
+            ValidateLifetime = true
+        };
+    });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireAuth", policy => { policy.RequireAuthenticatedUser(); });
+});
 
 var app = builder.Build();
 
-app.MapGet("/login", () =>
-{
-    var claims = new List<Claim>
-    {
-        new Claim("sub", Guid.NewGuid().ToString())
-    };
-
-    var identity = new ClaimsIdentity(claims, BearerTokenDefaults.AuthenticationScheme);
-    var principal = new ClaimsPrincipal(identity);
-
-    return Results.SignIn(principal, authenticationScheme: BearerTokenDefaults.AuthenticationScheme);
-});
-
 app.UseAuthentication();
-
 app.UseAuthorization();
 
 app.MapReverseProxy();
