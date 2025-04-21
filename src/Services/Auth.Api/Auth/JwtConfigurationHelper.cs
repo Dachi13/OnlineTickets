@@ -1,6 +1,3 @@
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-
 namespace Auth.Api.Auth;
 
 public static class JwtConfigurationHelper

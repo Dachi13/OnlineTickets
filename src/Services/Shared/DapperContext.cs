@@ -1,5 +1,4 @@
 using Npgsql;
-using Microsoft.Extensions.Configuration;
 
 namespace Shared;
 
