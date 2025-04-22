@@ -8,7 +8,7 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Services/Basket.Api/Basket.Api.csproj", "Services/Basket.Api/"]
-COPY ["Services/Shared/Shared.csproj", "Services/Shared/"]
+COPY ["Shared/Shared.csproj", "Shared/"]
 RUN dotnet restore "Services/Basket.Api/Basket.Api.csproj"
 COPY . .
 WORKDIR "/src/Services/Basket.Api"

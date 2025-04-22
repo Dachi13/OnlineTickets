@@ -6,7 +6,7 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Services/MessageSendingWorker/MessageSendingWorker.csproj", "Services/MessageSendingWorker/"]
-COPY ["Services/Shared/Shared.csproj", "Services/Shared/"]
+COPY ["Shared/Shared.csproj", "Shared/"]
 RUN dotnet restore "Services/MessageSendingWorker/MessageSendingWorker.csproj"
 COPY . .
 WORKDIR "/src/Services/MessageSendingWorker"

@@ -8,14 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="9.0.0" />
+        <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="9.0.0"/>
         <PackageReference Include="Grpc.AspNetCore" Version="2.49.0"/>
-        <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.2" />
-        <PackageReference Include="RabbitMQ.Client" Version="7.1.2" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\Shared\Shared.csproj"/>
+        <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.2"/>
+        <PackageReference Include="RabbitMQ.Client" Version="7.1.2"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -25,9 +21,13 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
+        <Content Include="..\..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Shared\Shared.csproj"/>
     </ItemGroup>
 
 </Project>

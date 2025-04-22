@@ -3,7 +3,7 @@ services:
   yarpapigateway:
     image: yarpapigateway
     build:
-      context: ../
+      context: .
       dockerfile: YarpApiGateway/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -18,7 +18,7 @@ services:
   auth.api:
     image: auth.api
     build:
-      context: ../
+      context: .
       dockerfile: Services/Auth.Api/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -33,7 +33,7 @@ services:
   event.api:
     image: event.api
     build:
-      context: ../
+      context: .
       dockerfile: Services/Events.Api/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -48,7 +48,7 @@ services:
   basket.api:
     image: basket.api
     build:
-      context: ../
+      context: .
       dockerfile: Services/Basket.Api/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -71,7 +71,7 @@ services:
   discount.grpc:
     image: discount.grpc
     build:
-      context: ../
+      context: .
       dockerfile: Services/Discount.Grpc/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -86,7 +86,7 @@ services:
   messageSendingWorker:
     image: messagesendingworker
     build:
-      context: ../
+      context: .
       dockerfile: Services/MessageSendingWorker/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
