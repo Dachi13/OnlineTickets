@@ -28,7 +28,6 @@ Follow the steps below to run the project locally:
 
 ```bash
 git clone https://github.com/your-username/OnlineTickets.git
-cd OnlineTickets
 ```
 
 ### 2. Open Solution Items and run
