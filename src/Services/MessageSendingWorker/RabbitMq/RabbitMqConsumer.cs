@@ -80,7 +80,7 @@ public class RabbitMqConsumer : IRabbitMqConsumer, IAsyncDisposable
                 return;
             }
 
-            var subject = "🎟️ Your Ticket Purchase Was Successful!";
+            var subject = "🎟️Your Ticket Purchase Was Successful!";
             var message = $"You have successfully purchased the ticket\n" +
                           $"Amount: {eventsBasket.Events.Count}\n" +
                           $"Total Price: {eventsBasket.TotalPrice}";
