@@ -1,8 +1,3 @@
-using MessageSendingWorker.Models;
-using Microsoft.Extensions.Options;
-using SendGrid;
-using SendGrid.Helpers.Mail;
-
 namespace MessageSendingWorker.EmailSenderService;
 
 public class EmailSender(IOptions<Config> emailConfig, ILogger<EmailSender> logger) : IEmailSender
@@ -21,8 +16,8 @@ public class EmailSender(IOptions<Config> emailConfig, ILogger<EmailSender> logg
         var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
 
         var response = await client.SendEmailAsync(msg);
-        
-        if(!response.IsSuccessStatusCode)
+
+        if (!response.IsSuccessStatusCode)
             logger.LogError($"[EMAIL FAILED] Failed to send email for \n\t{username} : {toEmail}.]");
     }
 

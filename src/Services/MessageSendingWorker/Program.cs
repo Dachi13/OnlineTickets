@@ -1,12 +1,7 @@
-using MessageSendingWorker;
-using MessageSendingWorker.EmailSenderService;
-using MessageSendingWorker.Models;
-using MessageSendingWorker.RabbitMq;
-using MessageSendingWorker.Repositories;
-using Shared;
-
 var builder = Host.CreateApplicationBuilder(args);
+
 var connectionString = builder.Configuration.GetConnectionString("Database")!;
+
 builder.Services.AddSingleton<DapperContext>(_ => new DapperContext(connectionString));
 builder.Services.Configure<RabbitMqSettings>(builder.Configuration.GetSection("RabbitMQ"));
 builder.Services.Configure<Config>(builder.Configuration.GetSection("Config"));

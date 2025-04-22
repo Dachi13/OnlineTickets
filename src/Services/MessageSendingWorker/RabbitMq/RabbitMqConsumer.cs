@@ -1,12 +1,3 @@
-using System.Text;
-using System.Text.Json;
-using MessageSendingWorker.EmailSenderService;
-using MessageSendingWorker.Models;
-using MessageSendingWorker.Repositories;
-using Microsoft.Extensions.Options;
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
-
 namespace MessageSendingWorker.RabbitMq;
 
 public class RabbitMqConsumer : IRabbitMqConsumer, IAsyncDisposable

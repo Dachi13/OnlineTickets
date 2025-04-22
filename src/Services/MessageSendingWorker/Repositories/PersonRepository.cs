@@ -1,7 +1,3 @@
-using Dapper;
-using MessageSendingWorker.Models;
-using Shared;
-
 namespace MessageSendingWorker.Repositories;
 
 public class PersonRepository(DapperContext context) : IPersonRepository

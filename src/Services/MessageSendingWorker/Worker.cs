@@ -1,5 +1,3 @@
-using MessageSendingWorker.RabbitMq;
-
 namespace MessageSendingWorker;
 
 public class Worker : BackgroundService

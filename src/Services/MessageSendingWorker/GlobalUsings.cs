@@ -1,0 +1,14 @@
+global using System.Text;
+global using System.Text.Json;
+global using MessageSendingWorker.EmailSenderService;
+global using MessageSendingWorker.Models;
+global using MessageSendingWorker.Repositories;
+global using Microsoft.Extensions.Options;
+global using RabbitMQ.Client;
+global using RabbitMQ.Client.Events;
+global using SendGrid;
+global using SendGrid.Helpers.Mail;
+global using MessageSendingWorker;
+global using MessageSendingWorker.RabbitMq;
+global using Shared;
+global using Dapper;
