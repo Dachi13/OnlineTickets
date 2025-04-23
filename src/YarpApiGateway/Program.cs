@@ -1,4 +1,6 @@
 using System.Text;
+using System.Threading.RateLimiting;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +8,17 @@ var configuration = builder.Configuration;
 
 builder.Services.AddReverseProxy()
     .LoadFromConfig(configuration.GetSection("ReverseProxy"));
+
+builder.Services.AddRateLimiter(options =>
+{
+    options.AddFixedWindowLimiter("customPolicy", opt =>
+    {
+        opt.PermitLimit = 4;
+        opt.Window = TimeSpan.FromSeconds(12);
+        opt.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+        opt.QueueLimit = 2;
+    });
+});
 
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
@@ -36,7 +49,7 @@ var app = builder.Build();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseRateLimiter();
 app.MapReverseProxy();
 
 app.Run();
