@@ -1,0 +1,43 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  dockerComposeFile: 'docker-compose.yml'
+
+steps:
+# Checkout your code
+- task: Checkout@1
+
+# Login to Docker (optional if pushing to DockerHub or ACR)
+# - task: Docker@2
+#   inputs:
+#     command: login
+#     containerRegistry: 'yourServiceConnectionName'
+
+# Build all services in docker-compose
+- task: DockerCompose@0
+  displayName: 'Build docker-compose services'
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerComposeFile: '$(dockerComposeFile)'
+    action: 'Build services'
+
+# (Optional) Run your app to test it
+- task: DockerCompose@0
+  displayName: 'Run docker-compose'
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerComposeFile: '$(dockerComposeFile)'
+    action: 'Run services'
+    detached: true
+
+# (Optional) Stop and cleanup
+- task: DockerCompose@0
+  displayName: 'Shut down containers'
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerComposeFile: '$(dockerComposeFile)'
+    action: 'Down'
